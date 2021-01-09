@@ -1,3 +1,6 @@
+import { combineReducers } from 'redux'
+import notificationReducer from './notificationReducer'
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -31,7 +34,7 @@ export const createAnecdote = (content) => {
   return { type: 'NEW_ANECDOTE', data: asObject(content) }
 }
 
-const reducer = (state = initialState, action) => {
+const anecdoteReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'UPVOTE':
       const voted = state.find((a) => a.id === action.data.id)
@@ -53,5 +56,10 @@ const reducer = (state = initialState, action) => {
       return state
   }
 }
+
+const reducer = combineReducers({
+  anecdotes: anecdoteReducer,
+  notification: notificationReducer,
+})
 
 export default reducer
