@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import filterReducer from './filterReducer'
 import notificationReducer from './notificationReducer'
 
 const anecdotesAtStart = [
@@ -60,6 +61,7 @@ const anecdoteReducer = (state = initialState, action) => {
 const reducer = combineReducers({
   anecdotes: anecdoteReducer,
   notification: notificationReducer,
+  filter: filterReducer,
 })
 
 export default reducer

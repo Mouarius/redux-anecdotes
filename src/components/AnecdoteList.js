@@ -9,7 +9,9 @@ import {
 const AnecdoteList = () => {
   const dispatch = useDispatch()
 
-  const anecdotes = useSelector((state) => state.anecdotes)
+  const anecdotes = useSelector((state) => {
+    return state.anecdotes.filter((anec) => anec.content.includes(state.filter))
+  })
 
   const vote = (anecdote) => {
     dispatch(voteAnecdote(anecdote.id))
