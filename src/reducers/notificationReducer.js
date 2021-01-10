@@ -11,10 +11,15 @@ const notificationReducer = (state = defaultNotification, action) => {
   }
 }
 
+let removeTimeout
+
 export const setNotification = (message, timeout) => {
   return async (dispatch) => {
     dispatch({ type: 'SET_NOTIFICATION', data: message })
-    await setTimeout(
+    if (removeTimeout) {
+      clearTimeout(removeTimeout)
+    }
+    removeTimeout = setTimeout(
       () =>
         dispatch({
           type: 'REMOVE_NOTIFICATION',
